@@ -1,0 +1,8 @@
+{
+  "name": "AgroMarket",
+  "description": "Sri Lankan agricultural marketplace connecting farmers and buyers directly with secure payments and delivery coordination.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

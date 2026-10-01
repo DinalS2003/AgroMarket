@@ -1,0 +1,53 @@
+# Supabase configuration for AgroMarket
+project_id = "agromarket"
+
+[api]
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[db.pooler]
+port = 54329
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[auth]
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = ["https://127.0.0.1:3000"]
+jwt_expiry = 2592000
+enable_signup = true
+
+[auth.sms]
+enable_signup = true
+enable_confirmations = true
+template = "Your AgroMarket verification code is {{ .Code }}."
+
+[auth.hook.send_sms]
+enabled = true
+uri = "http://host.docker.internal:54321/functions/v1/send-sms-hook"
+
+[storage]
+enabled = true
+file_size_limit = "5MB"
+
+[functions.send-sms-hook]
+verify_jwt = false
+
+[functions.send-message]
+verify_jwt = true
+
+[functions.payhere-create-payment]
+verify_jwt = true
+
+[functions.payhere-notify]
+verify_jwt = false
+
+[functions.push-dispatch]
+verify_jwt = true
